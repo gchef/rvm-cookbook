@@ -19,4 +19,5 @@
 
 bash "Install RVM system-wide" do
   code "bash < <( curl -L http://bit.ly/rvm-install-system-wide )"
+  not_if { "test -d /usr/local/rvm" }
 end
