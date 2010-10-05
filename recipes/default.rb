@@ -29,8 +29,10 @@ bash "Install RVM system-wide" do
   not_if { File.exists? "/usr/local/rvm" }
 end
 
-bash "Add RVM to the global profile" do
-  file_append("/etc/profile", "[[ -s '/usr/local/lib/rvm' ]] && source '/usr/local/lib/rvm'")
+ruby_block "Add RVM to the global profile" do
+  block do
+    file_append("/etc/profile", "[[ -s '/usr/local/lib/rvm' ]] && source '/usr/local/lib/rvm'")
+  end
 end
 
 add_rvmrc "root"
