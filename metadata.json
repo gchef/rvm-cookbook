@@ -1,33 +1,36 @@
 {
-    "suggestions": {
+    "groupings": {
+    },
+    "recommendations": {
     },
     "recipes": {
       "rvm": "Installs rvm system-wide"
     },
+    "long_description": "h1. RVM system-wide cookbook\n\nDoes exactly what it says",
     "description": "Installs and configures rvm system wide",
-    "conflicting": {
+    "suggestions": {
     },
     "attributes": {
     },
-    "providing": {
+    "conflicting": {
     },
     "dependencies": {
+      "helper": [
+
+      ],
       "git": [
 
       ]
     },
-    "maintainer": "Paper Cavalier",
-    "replacing": {
+    "providing": {
     },
     "platforms": {
     },
-    "maintainer_email": "code@papercavalier.com",
+    "maintainer": "Paper Cavalier",
     "name": "rvm",
-    "version": "0.1.0",
-    "groupings": {
+    "version": "0.1.1",
+    "replacing": {
     },
     "license": "Apache 2.0",
-    "long_description": "h1. RVM system-wide cookbook\n\nDoes exactly what it says",
-    "recommendations": {
-    }
+    "maintainer_email": "code@papercavalier.com"
   }

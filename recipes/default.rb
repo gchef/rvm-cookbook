@@ -18,8 +18,19 @@
 #
 
 include_recipe "git"
+include_recipe "helper"
+
+class Chef::Recipe
+  include FileHelpers
+end
 
 bash "Install RVM system-wide" do
   code "bash < <( curl -L http://bit.ly/rvm-install-system-wide )"
-  not_if { "test -d /usr/local/rvm" }
+  not_if { File.exists? "/usr/local/rvm" }
 end
+
+bash "Add RVM to the global profile" do
+  file_append("/etc/profile", "[[ -s '/usr/local/lib/rvm' ]] && source '/usr/local/lib/rvm'")
+end
+
+add_rvmrc "root"
