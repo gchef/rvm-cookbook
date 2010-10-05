@@ -20,7 +20,7 @@
 include_recipe "git"
 include_recipe "helper"
 
-class Chef::Recipe
+class Chef::Resource
   include FileHelpers
 end
 
