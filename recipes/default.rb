@@ -36,3 +36,7 @@ ruby_block "Add RVM to the global profile" do
 end
 
 add_rvmrc "root"
+
+if platform?("debian", "ubuntu")
+  package "libreadline5-dev"
+end

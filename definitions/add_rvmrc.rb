@@ -1,6 +1,6 @@
 define :add_rvmrc do
   path = (params[:name] == "root" ? "/root" : "/home/#{params[:name]}")
-  
+
   template "#{path}/.rvmrc" do
     source "rvmrc.erb"
     cookbook "rvm"
