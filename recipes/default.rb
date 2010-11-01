@@ -24,6 +24,8 @@ class Chef::Resource
   include FileHelpers
 end
 
+package "curl"
+
 bash "Install RVM system-wide" do
   code "bash < <( curl -L http://bit.ly/rvm-install-system-wide )"
   not_if { File.exists? "/usr/local/rvm" }
