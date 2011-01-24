@@ -2,7 +2,7 @@
 # Cookbook Name:: rvm
 # Recipe:: default
 #
-# Copyright 2010, Papercavalier
+# Copyright 2011, Papercavalier
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,32 +18,18 @@
 #
 
 include_recipe "git"
-include_recipe "helper"
-
-class Chef::Resource
-  include FileHelpers
-end
 
 package "curl"
 
-# Ensure packages required by MRI are installed 
+# Ensure packages required by MRI are installed
 if platform?("debian", "ubuntu")
   %w{bison openssl libreadline5 libreadline5-dev zlib1g zlib1g-dev libssl-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev}
 elsif platform?("centos", "redhat", "fedora", "suse")
   %w{patch readline readline-devel zlib zlib-devel libyaml-devel libffi-devel iconv-devel}
 else
   []
-end.each { |name| package name } 
+end.each { |name| package name }
 
-bash "Install RVM system-wide" do
-  code "bash < <( curl -L http://bit.ly/rvm-install-system-wide )"
-  not_if { File.exists? "/usr/local/rvm" }
+install_rvm do
+  rubies node["rvm"]["rubies"]
 end
-
-ruby_block "Add RVM to the global profile" do
-  block do
-    file_append("/etc/profile", "[[ -s '/usr/local/lib/rvm' ]] && source '/usr/local/lib/rvm'")
-  end
-end
-
-add_rvmrc "root"
