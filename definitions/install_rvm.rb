@@ -1,4 +1,4 @@
-define :install_rvm do
+define :install_rvm, :rubies => [] do
   bash "install_rvm" do
     code <<-EOH
     bash < <( curl -L http://bit.ly/rvm-install-system-wide )
