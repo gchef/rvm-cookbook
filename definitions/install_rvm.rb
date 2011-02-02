@@ -1,4 +1,4 @@
-define :install_rvm, :rubies => [] do
+define :install_rvm do
   bash "install_rvm" do
     code <<-EOH
     bash < <( curl -L http://bit.ly/rvm-install-system-wide )
@@ -11,15 +11,5 @@ define :install_rvm, :rubies => [] do
 
   unless File.read(profile).include? line
     File.open(profile, "a") { |f| f.puts line }
-  end
-
-  params[:rubies].each do |ruby|
-    bash "install_#{ruby.gsub(/\W/, '_').downcase}" do
-      code <<-EOH
-      rvm install #{ruby}
-      rvm --create #{ruby}@global exec gem install bundler
-      EOH
-      not_if { `rvm list`.include? ruby }
-    end
   end
 end
