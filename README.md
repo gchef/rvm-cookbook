@@ -1,7 +1,7 @@
-RVM System Wide Cookbook
+RVM Cookbook
 ========================
 
-This cookbook installs RVM system wide.
+This cookbook installs RVM as root, shared across all users.
 
 Usage
 -----
