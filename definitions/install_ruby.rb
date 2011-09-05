@@ -6,7 +6,7 @@ define :install_ruby do
       rvm install #{ruby}
       rvm --create #{ruby}@global exec gem install bundler
     }
-    only_if "[ $(rvm list | grep -c #{ruby}) -eq 0 ]"
+    only_if "[ $(/usr/local/rvm/bin/rvm list | grep -c #{ruby}) -eq 0 ]"
   end
 end
 
