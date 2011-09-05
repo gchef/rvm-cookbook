@@ -2,7 +2,9 @@
 # Cookbook Name:: rvm
 # Attribute File:: default
 #
-# Copyright 2011, Paper Cavalier
+# Author:: Gerhard Lazu (<gerhard@lazu.co.uk>)
+#
+# Copyright 2011, Gerhard Lazu
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,6 +19,4 @@
 # limitations under the License.
 #
 
-default[:rvm][:rubies] = Array.new 
-default[:rvm][:default] = nil
-
+default[:rvm][:rubies] = []

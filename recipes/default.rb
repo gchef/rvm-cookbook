@@ -2,7 +2,9 @@
 # Cookbook Name:: rvm
 # Recipe:: default
 #
-# Copyright 2011, Papercavalier
+# Author:: Gerhard Lazu (<gerhard@lazu.co.uk>)
+#
+# Copyright 2011, Gerhard Lazu
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,14 +25,32 @@ package "curl"
 
 # Ensure packages required by MRI are installed
 if platform?("debian", "ubuntu")
-  %w{bison openssl libreadline5 libreadline5-dev zlib1g zlib1g-dev libssl-dev
-     libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev}
+  package "bison"
+  package "libcurl3"
+  package "libcurl3-gnutls"
+  package "libcurl4-openssl-dev"
+  package "libreadline5"
+  package "libreadline5-dev"
+  package "libssl-dev"
+  package "libsqlite3-0"
+  package "libsqlite3-dev"
+  package "libxml2"
+  package "libxml2-dev"
+  package "libxslt1-dev"
+  package "openssl"
+  package "sqlite3"
+  package "zlib1g"
+  package "zlib1g-dev"
 elsif platform?("centos", "redhat", "fedora", "suse")
-  %w{patch readline readline-devel zlib zlib-devel libyaml-devel libffi-devel
-     iconv-devel}
-else
-  []
-end.each { |name| package name }
+  package "patch"
+  package "readline"
+  package "readline-devel"
+  package "zlib"
+  package "zlib-devel"
+  package "libyaml-devel"
+  package "libffi-devel"
+  package "iconv-devel"
+end
 
 install_rvm
 

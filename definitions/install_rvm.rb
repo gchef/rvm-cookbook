@@ -1,8 +1,6 @@
 define :install_rvm do
-  bash "install_rvm" do
-    code <<-EOH
-    bash < <(curl -s https://rvm.beginrescueend.com/install/rvm)
-    EOH
-    not_if { File.exists? "/usr/local/rvm" }
+  bash "Installing rvm" do
+    code "bash < <(curl -s https://rvm.beginrescueend.com/install/rvm) && source ~/.bashrc"
+    not_if "[ -d /usr/local/rvm ]"
   end
 end
