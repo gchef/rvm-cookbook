@@ -54,4 +54,12 @@ end
 
 install_rvm
 
-node["rvm"]["rubies"].each { |ruby| install_ruby ruby }
+node[:rvm][:rubies].each do |ruby|
+  install_ruby ruby
+end
+
+# This will screw with chef...
+# bash "Setting default ruby" do
+#   code "rvm default #{node[:rvm][:default_rub]}"
+#   only_if node[:rvm][:default_ruby]
+# end
