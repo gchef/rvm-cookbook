@@ -6,7 +6,7 @@ node[:bootstrap][:users].each do |username, properties|
   next unless properties[:deploy]
 
   add_to_groups username do
-    groups %(rvm)
+    groups %w(rvm)
   end
 
   rvm_profile username
