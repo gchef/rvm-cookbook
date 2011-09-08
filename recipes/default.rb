@@ -19,47 +19,23 @@
 # limitations under the License.
 #
 
-include_recipe "git"
-
-package "curl"
-
-# Ensure packages required by MRI are installed
-if platform?("debian", "ubuntu")
-  package "bison"
-  package "libcurl3"
-  package "libcurl3-gnutls"
-  package "libcurl4-openssl-dev"
-  package "libreadline5"
-  package "libreadline5-dev"
-  package "libssl-dev"
-  package "libsqlite3-0"
-  package "libsqlite3-dev"
-  package "libxml2"
-  package "libxml2-dev"
-  package "libxslt1-dev"
-  package "openssl"
-  package "sqlite3"
-  package "zlib1g"
-  package "zlib1g-dev"
-elsif platform?("centos", "redhat", "fedora", "suse")
-  package "patch"
-  package "readline"
-  package "readline-devel"
-  package "zlib"
-  package "zlib-devel"
-  package "libyaml-devel"
-  package "libffi-devel"
-  package "iconv-devel"
+# Ensure most common packages required by Ruby apps are installed
+#
+node[:rvm_packages].each do |package_name|
+  package package_name
 end
 
-install_rvm
-
-node[:rvm][:rubies].each do |ruby|
-  install_ruby ruby
+bash "Installing rvm" do
+  code "bash < <(curl -s #{node[:rvm_source]})"
+  not_if "[ -d #{node[:rvm_path]} ]"
 end
 
-# This will screw with chef...
-# bash "Setting default ruby" do
-#   code "rvm default #{node[:rvm][:default_rub]}"
-#   only_if node[:rvm][:default_ruby]
-# end
+node[:rvm_rubies].each do |ruby|
+  bash "RVM installing Ruby #{ruby}" do
+    code %{
+      #{node[:rvm_bin]} install #{ruby}
+      #{node[:rvm_bin]} --create #{ruby}@global exec gem install #{node[:rvm_global_gems].join(' ')}
+    }
+    only_if "[ $(#{node[:rvm_bin]} list | grep -c #{ruby}) -eq 0 ]"
+  end
+end
