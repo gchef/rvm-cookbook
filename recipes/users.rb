@@ -4,17 +4,12 @@
 node[:bootstrap][:users].each do |username, properties|
   next if properties[:allow] && !properties[:allow].include?(node.hostname)
   next unless properties[:deploy]
-  bash "Adding #{username} to rvm group" do
-    code "usermod -a -G rvm #{username}"
-    only_if "[ $(id #{username} 2>&1 | grep -c uid) -gt 0 ]"
+
+  add_to_groups username do
+    groups %(rvm)
   end
 
-  bash "Add rvm sourcing to #{username} bash profile" do
-    code %{
-      echo "source '#{node[:rvm_script]}'" >> /home/#{username}/.profile
-    }
-    only_if "[ $(grep -c rvm /home/#{username}/.profile) -eq 0 ]"
-  end
+  rvm_profile username
 
-  add_rvmrc_file_to username
+  rvmrc_file username
 end

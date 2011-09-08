@@ -1,4 +1,4 @@
-define :add_rvmrc_file_to do
+define :rvmrc_file do
   username = params[:name]
 
   if username
