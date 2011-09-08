@@ -25,7 +25,7 @@ default[:rvm_bin]    = "#{rvm_path}/bin/rvm"
 default[:rvm_script] = "#{rvm_path}/scripts/rvm"
 
 default[:rvm_rubies] = []
-default[:rvm_global_gems] = ["bundler", "rake", "pry"]
+default[:rvm_global_gems] = %w(bundler rake pry)
 default[:rvm_packages]    = case platform
   when "debian","ubuntu"
     [
