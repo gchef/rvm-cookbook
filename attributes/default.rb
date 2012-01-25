@@ -42,6 +42,7 @@ default[:rvm_packages]    = case platform
       "libxml2",
       "libxml2-dev",
       "libxslt1-dev",
+      "libyaml-dev",
       "openssl",
       "sqlite3",
       "zlib1g",
