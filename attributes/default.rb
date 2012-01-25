@@ -19,7 +19,7 @@
 # limitations under the License.
 #
 
-default[:rvm_source] = "https://rvm.beginrescueend.com/install/rvm"
+default[:rvm_source] = "https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer"
 default[:rvm_path]   = "/usr/local/rvm"
 default[:rvm_bin]    = "#{rvm_path}/bin/rvm"
 default[:rvm_script] = "#{rvm_path}/scripts/rvm"

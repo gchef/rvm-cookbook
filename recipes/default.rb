@@ -26,7 +26,7 @@ node[:rvm_packages].each do |package_name|
 end
 
 bash "Installing rvm" do
-  code "bash < <(curl -s #{node[:rvm_source]})"
+  code "bash -s stable < <(curl -s #{node[:rvm_source]})"
   not_if "[ -d #{node[:rvm_path]} ]"
 end
 
