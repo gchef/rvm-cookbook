@@ -1,18 +1,4 @@
-RVM Cookbook
-========================
+# RVM Cookbook
 
-This cookbook installs RVM as root, shared across all users.
-
-Usage
------
-
-To use this cookbook, set the following attributes on the node via a role or the node object itself. In a role.rb:
-
-    "rvm" => {
-      "rubies"  => ["ree", "1.9.2"]
-      }
-    }
-
-When creating a user in a recipe, you may use the following helper:
-
-    add_rvmrc_file_to "username"
+This cookbook installs RVM system-wide. Check the cookbook's attributes for
+supported options.
